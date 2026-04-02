@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { getWhatsAppHref } from '../config/siteConfig'
 import poster1 from '../images/editorial/poster-1.jpg'
 import poster2 from '../images/editorial/poster-2.jpg'
@@ -38,6 +39,9 @@ const Gallery = () => {
   useEffect(() => {
     if (selectedIndex === null) return
 
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
     const onKeyDown = (event) => {
       if (event.key === 'Escape') closeLightbox()
       if (event.key === 'ArrowLeft') goPrev()
@@ -45,7 +49,10 @@ const Gallery = () => {
     }
 
     window.addEventListener('keydown', onKeyDown)
-    return () => window.removeEventListener('keydown', onKeyDown)
+    return () => {
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener('keydown', onKeyDown)
+    }
   }, [selectedIndex])
 
   return (
@@ -66,7 +73,7 @@ const Gallery = () => {
           <button
             key={image.alt}
             type="button"
-            className={`${styles.card} ${index === 0 ? styles.featured : ''}`}
+            className={styles.card}
             onClick={() => setSelectedIndex(index)}
             aria-label={`Abrir ${image.alt} en grande`}
           >
@@ -82,45 +89,49 @@ const Gallery = () => {
         </a>
       </div>
 
-      {selectedImage && (
-        <div className={styles.overlay} onClick={closeLightbox} role="dialog" aria-modal="true">
-          <div className={styles.modal} onClick={(event) => event.stopPropagation()}>
-            <button
-              type="button"
-              className={styles.closeButton}
-              onClick={closeLightbox}
-              aria-label="Cerrar imagen"
-            >
-              {'x'}
-            </button>
+      {selectedImage &&
+        createPortal(
+          <div className={styles.overlay} onClick={closeLightbox} role="dialog" aria-modal="true">
+            <div className={styles.modalShell} onClick={(event) => event.stopPropagation()}>
+              <button
+                type="button"
+                className={styles.closeButton}
+                onClick={closeLightbox}
+                aria-label="Cerrar imagen"
+              >
+                {'X'}
+              </button>
 
-            <button
-              type="button"
-              className={`${styles.navButton} ${styles.prevButton}`}
-              onClick={goPrev}
-              aria-label="Imagen anterior"
-            >
-              {'<'}
-            </button>
+              <button
+                type="button"
+                className={`${styles.navButton} ${styles.prevButton}`}
+                onClick={goPrev}
+                aria-label="Imagen anterior"
+              >
+                {'<'}
+              </button>
 
-            <img
-              className={styles.modalImage}
-              src={selectedImage.src}
-              alt={selectedImage.alt}
-              loading="eager"
-            />
+              <div className={styles.centerStage}>
+                <img
+                  className={styles.modalImage}
+                  src={selectedImage.src}
+                  alt={selectedImage.alt}
+                  loading="eager"
+                />
+              </div>
 
-            <button
-              type="button"
-              className={`${styles.navButton} ${styles.nextButton}`}
-              onClick={goNext}
-              aria-label="Imagen siguiente"
-            >
-              {'>'}
-            </button>
-          </div>
-        </div>
-      )}
+              <button
+                type="button"
+                className={`${styles.navButton} ${styles.nextButton}`}
+                onClick={goNext}
+                aria-label="Imagen siguiente"
+              >
+                {'>'}
+              </button>
+            </div>
+          </div>,
+          document.body
+        )}
     </section>
   )
 }

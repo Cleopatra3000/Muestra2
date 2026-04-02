@@ -107,10 +107,6 @@
   align-content: center;
 }
 
-.note {
-  max-width: 36rem;
-}
-
 .actions {
   display: flex;
   flex-wrap: wrap;
@@ -146,12 +142,12 @@
 .lightbox {
   position: fixed;
   inset: 0;
-  z-index: 2100;
+  z-index: 9999;
   display: grid;
   place-items: center;
-  padding: 1.25rem;
-  background: rgba(10, 27, 24, 0.92);
-  backdrop-filter: blur(12px);
+  padding: 1rem;
+  background: rgba(7, 9, 11, 0.92);
+  backdrop-filter: blur(8px);
 }
 
 .lightboxContent {
@@ -160,11 +156,13 @@
 
 .lightboxImage {
   display: block;
-  width: min(92vw, 980px);
-  max-height: 92vh;
+  width: auto;
+  height: auto;
+  max-width: calc(100vw - 4rem);
+  max-height: calc(100dvh - 4rem);
   object-fit: contain;
-  border-radius: 28px;
-  box-shadow: var(--shadow-lg);
+  border-radius: 20px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
 }
 
 @media (max-width: 900px) {

@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import heroMain from '../images/editorial/hero-main.jpg'
 import { SITE_CONFIG, getWhatsAppHref } from '../config/siteConfig'
 import styles from './Hero.module.css'
@@ -10,9 +11,19 @@ const Hero = () => {
     setIsImageExpanded((current) => !current)
   }
 
+  useEffect(() => {
+    if (!isImageExpanded) return
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
+  }, [isImageExpanded])
+
   return (
     <section className={styles.hero}>
-
       <div className={styles.topRow}>
         <div className={styles.headingBlock}>
           <h1 className={styles.name}>{SITE_CONFIG.displayName}</h1>
@@ -48,10 +59,6 @@ const Hero = () => {
         </div>
 
         <div className={styles.contentColumn}>
-          <p className={styles.note}>
-            Haz clic en la imagen para verla mas grande y vuelve a hacer clic para reducirla.
-          </p>
-
           <div className={styles.actions}>
             <a
               className={styles.button}
@@ -65,24 +72,26 @@ const Hero = () => {
         </div>
       </div>
 
-      {isImageExpanded && (
-        <div
-          className={styles.lightbox}
-          onClick={toggleImageSize}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Imagen principal ampliada"
-        >
-          <div className={styles.lightboxContent}>
-            <img
-              className={styles.lightboxImage}
-              src={heroMain}
-              alt={`Imagen principal ampliada de ${SITE_CONFIG.displayName}`}
-            />
+      {isImageExpanded &&
+        createPortal(
+          <div
+            className={styles.lightbox}
+            onClick={toggleImageSize}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Imagen principal ampliada"
+          >
+            <div className={styles.lightboxContent}>
+              <img
+                className={styles.lightboxImage}
+                src={heroMain}
+                alt={`Imagen principal ampliada de ${SITE_CONFIG.displayName}`}
+              />
+            </div>
           </div>
-        </div>
-      )}
-      
+          ,
+          document.body
+        )}
     </section>
   )
 }
