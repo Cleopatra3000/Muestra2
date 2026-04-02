@@ -31,14 +31,14 @@ const Hero = () => {
         <div className={styles.imageColumn}>
           <button
             type="button"
-            className={`${styles.imageButton} ${isImageExpanded ? styles.imageButtonExpanded : ''}`}
+            className={styles.imageButton}
             onClick={toggleImageSize}
             aria-label={isImageExpanded ? 'Reducir imagen principal' : 'Ampliar imagen principal'}
             aria-pressed={isImageExpanded}
           >
-            <div className={`${styles.imageFrame} ${isImageExpanded ? styles.imageFrameExpanded : ''}`}>
+            <div className={styles.imageFrame}>
               <img
-                className={`${styles.image} ${isImageExpanded ? styles.imageExpanded : ''}`}
+                className={styles.image}
                 src={heroMain}
                 alt={`Imagen principal de ${SITE_CONFIG.displayName}`}
               />
@@ -63,6 +63,24 @@ const Hero = () => {
           </div>
         </div>
       </div>
+
+      {isImageExpanded && (
+        <div
+          className={styles.lightbox}
+          onClick={toggleImageSize}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Imagen principal ampliada"
+        >
+          <div className={styles.lightboxContent}>
+            <img
+              className={styles.lightboxImage}
+              src={heroMain}
+              alt={`Imagen principal ampliada de ${SITE_CONFIG.displayName}`}
+            />
+          </div>
+        </div>
+      )}
     </section>
   )
 }

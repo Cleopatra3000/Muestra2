@@ -82,10 +82,6 @@
   cursor: zoom-in;
 }
 
-.imageButtonExpanded {
-  cursor: zoom-out;
-}
-
 .imageFrame {
   padding: 0.8rem;
   width: min(100%, 360px);
@@ -93,12 +89,7 @@
   border: 1px solid rgba(15, 108, 97, 0.12);
   background: rgba(255, 255, 255, 0.6);
   box-shadow: var(--shadow-sm);
-  transition: width 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.imageFrameExpanded {
-  width: min(100%, 520px);
-  box-shadow: var(--shadow-md);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .image {
@@ -107,11 +98,7 @@
   aspect-ratio: 4 / 5;
   object-fit: cover;
   border-radius: 22px;
-  transition: border-radius 0.25s ease;
-}
-
-.imageExpanded {
-  border-radius: 26px;
+  transition: transform 0.25s ease;
 }
 
 .contentColumn {
@@ -156,6 +143,30 @@
   outline-offset: 2px;
 }
 
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2100;
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+  background: rgba(10, 27, 24, 0.92);
+  backdrop-filter: blur(12px);
+}
+
+.lightboxContent {
+  cursor: zoom-out;
+}
+
+.lightboxImage {
+  display: block;
+  width: min(92vw, 980px);
+  max-height: 92vh;
+  object-fit: contain;
+  border-radius: 28px;
+  box-shadow: var(--shadow-lg);
+}
+
 @media (max-width: 900px) {
   .topRow,
   .heroCard {
@@ -168,10 +179,6 @@
 
   .imageFrame {
     width: min(100%, 320px);
-  }
-
-  .imageFrameExpanded {
-    width: min(100%, 440px);
   }
 }
 
@@ -200,9 +207,5 @@
 
   .imageFrame {
     width: min(100%, 280px);
-  }
-
-  .imageFrameExpanded {
-    width: min(100%, 92vw);
   }
 }
