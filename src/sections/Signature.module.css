@@ -1,0 +1,67 @@
+.section {
+  display: grid;
+  gap: clamp(1rem, 2.2vw, 1.7rem);
+}
+
+.heading {
+  display: grid;
+  gap: 0.45rem;
+  max-width: 56rem;
+}
+
+.eyebrow {
+  color: var(--color-primary);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.title {
+  max-width: 16ch;
+  text-wrap: balance;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  display: grid;
+  gap: 0.7rem;
+  padding: 1.25rem;
+  border-radius: 28px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(234, 242, 237, 0.9));
+  border: 1px solid rgba(15, 108, 97, 0.12);
+  box-shadow: var(--shadow-sm);
+}
+
+.index {
+  display: inline-flex;
+  width: fit-content;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(15, 108, 97, 0.08);
+  color: var(--color-primary);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.cardTitle {
+  font-size: 1.35rem;
+  color: var(--color-ink);
+}
+
+.cardText {
+  color: var(--color-muted);
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

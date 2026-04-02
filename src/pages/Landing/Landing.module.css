@@ -1,0 +1,44 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2.8vw, 1.9rem);
+}
+
+.section {
+  position: relative;
+  padding: clamp(1rem, 3vw, 2rem);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg, 38px);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.72) 0%, rgba(245, 249, 246, 0.92) 100%);
+  box-shadow: var(--shadow-md, 0 24px 60px rgba(0, 0, 0, 0.28));
+  overflow: clip;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  backdrop-filter: blur(14px);
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(15, 108, 97, 0.4) 50%, transparent 100%);
+}
+
+.section:hover {
+  border-color: rgba(15, 108, 97, 0.24);
+  box-shadow: 0 30px 70px rgba(17, 48, 41, 0.14);
+}
+
+.heroSection {
+  padding: clamp(1.25rem, 3.3vw, 2.5rem);
+  background:
+    radial-gradient(circle at top right, rgba(21, 144, 127, 0.18), transparent 28%),
+    radial-gradient(circle at 15% 20%, rgba(201, 115, 82, 0.16), transparent 26%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(239, 246, 241, 0.96) 100%);
+}
+
+.featureSection {
+  background:
+    radial-gradient(circle at 10% 30%, rgba(201, 115, 82, 0.1), transparent 20%),
+    linear-gradient(180deg, rgba(250, 252, 250, 0.92) 0%, rgba(240, 246, 242, 0.94) 100%);
+}

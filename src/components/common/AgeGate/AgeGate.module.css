@@ -1,0 +1,108 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  background:
+    linear-gradient(180deg, rgba(231, 240, 234, 0.72), rgba(225, 236, 229, 0.9)),
+    radial-gradient(circle at top left, rgba(21, 144, 127, 0.12), transparent 32%),
+    radial-gradient(circle at 85% 15%, rgba(201, 115, 82, 0.12), transparent 28%);
+  backdrop-filter: blur(22px);
+}
+
+.card {
+  width: min(100%, 34rem);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border: 1px solid rgba(15, 108, 97, 0.16);
+  border-radius: 32px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(240, 246, 242, 0.98));
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+}
+
+.eyebrow {
+  margin-bottom: 0.75rem;
+  color: var(--color-primary);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin-bottom: 1rem;
+}
+
+.text {
+  color: var(--color-text);
+}
+
+.note {
+  margin-top: 0.9rem;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+
+.actions {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 1.5rem;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem 1rem;
+  margin-top: 1.4rem;
+}
+
+.link {
+  color: var(--color-muted);
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.link:hover,
+.link:focus-visible {
+  color: var(--color-primary-hover);
+}
+
+.primaryButton,
+.secondaryButton {
+  width: 100%;
+  min-height: 3.25rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.primaryButton {
+  background: linear-gradient(135deg, #0f6c61, #15907f);
+  color: #effaf6;
+}
+
+.secondaryButton {
+  border-color: rgba(15, 108, 97, 0.12);
+  background: rgba(15, 108, 97, 0.05);
+  color: var(--color-text);
+}
+
+.primaryButton:hover,
+.secondaryButton:hover {
+  transform: translateY(-1px);
+}
+
+.primaryButton:focus-visible,
+.secondaryButton:focus-visible {
+  outline: 2px solid rgba(21, 144, 127, 0.42);
+  outline-offset: 2px;
+}
