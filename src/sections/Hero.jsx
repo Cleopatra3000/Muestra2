@@ -12,6 +12,7 @@ const Hero = () => {
 
   return (
     <section className={styles.hero}>
+
       <div className={styles.topRow}>
         <div className={styles.headingBlock}>
           <h1 className={styles.name}>{SITE_CONFIG.displayName}</h1>
@@ -81,6 +82,7 @@ const Hero = () => {
           </div>
         </div>
       )}
+      
     </section>
   )
 }
