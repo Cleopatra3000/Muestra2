@@ -4,7 +4,7 @@
   z-index: 2000;
   display: grid;
   place-items: center;
-  padding: 1.5rem;
+  padding: clamp(1rem, 3vw, 2rem);
   background:
     linear-gradient(180deg, rgba(231, 240, 234, 0.72), rgba(225, 236, 229, 0.9)),
     radial-gradient(circle at top left, rgba(21, 144, 127, 0.12), transparent 32%),
@@ -13,7 +13,9 @@
 }
 
 .card {
-  width: min(100%, 34rem);
+  width: min(100%, 42rem);
+  max-height: calc(100dvh - 2rem);
+  overflow: auto;
   padding: clamp(1.5rem, 4vw, 2.5rem);
   border: 1px solid rgba(15, 108, 97, 0.16);
   border-radius: 32px;
@@ -33,16 +35,24 @@
 
 .title {
   margin-bottom: 1rem;
+  font-size: clamp(2.1rem, 5vw, 4.4rem);
+  line-height: 0.98;
+  letter-spacing: 0;
+  text-wrap: balance;
 }
 
 .text {
   color: var(--color-text);
+  max-width: 36rem;
+  margin-inline: auto;
 }
 
 .note {
   margin-top: 0.9rem;
   color: var(--color-muted);
   font-size: 0.95rem;
+  max-width: 34rem;
+  margin-inline: auto;
 }
 
 .actions {
@@ -105,4 +115,15 @@
 .secondaryButton:focus-visible {
   outline: 2px solid rgba(21, 144, 127, 0.42);
   outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .card {
+    border-radius: 26px;
+    max-height: calc(100dvh - 1.5rem);
+  }
+
+  .title {
+    font-size: clamp(2rem, 11vw, 3.4rem);
+  }
 }
